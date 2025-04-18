@@ -1,6 +1,9 @@
-import os
-from PIL import Image
-from torchvision import datasets, transforms, models
-from torch.utils.data import DataLoader
-import torch.nn as nn
-import torch
+import pandas as pd
+import numpy as np
+import tkinter as tkint
+from tkinter import ttk
+
+pokedata = pd.read_csv("pokedata.csv", index_col = 0)
+
+stats = ['hp', 'attack', 'defense', 'sp_attack', 'sp_defence', 'speed']
+
