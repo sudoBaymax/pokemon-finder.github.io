@@ -242,3 +242,12 @@ def search_pokemon():
                 values.append(name)
         pokemon_search_box.config(values = values)
     
+pokemon_search_box = ttk.Combobox(search_frame, 
+                          values = pokedata.name.tolist(),
+                          font = ("Futura", 16), 
+                          postcommand = search_pokemon)
+pokemon_search_box.grid(row = 0, column = 1, columnspan = 2, sticky = "nsew", pady = 5, padx = 10)
+
+search_frame.grid(row = 0, column = 1, columnspan = 2, sticky = "ew")
+
+window.mainloop()
