@@ -231,3 +231,14 @@ right_button = tkint.Button(search_frame, text = "  Next  ", font = ("Futura", 1
                          command = lambda: select_pokemon(move = "forward"))
 right_button.grid(row = 0, column = 4, sticky = "ew")
 
+def search_pokemon():
+    current_text = pokemon_search_box.get()
+    if current_text == "" or current_text in pokedata.name.tolist():
+        pokemon_search_box.config(values = pokedata.name.tolist())
+    else:
+        values = []
+        for name in pokedata.name.tolist():
+            if current_text.lower() in name.lower():
+                values.append(name)
+        pokemon_search_box.config(values = values)
+    
