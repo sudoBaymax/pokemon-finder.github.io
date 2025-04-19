@@ -18,20 +18,59 @@ def scale_stat(x):
         x = max_x
     return round((start_x1 - start_x2)*((x - min_x) / (max_x - min_x)) + start_x2)
 
+# Add this code before the select_pokemon function to define type_dict
+type_dict = {}
+type_names = ["normal", "fire", "water", "grass", "electric", "ice", "fighting", 
+              "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", 
+              "dragon", "dark", "steel", "fairy", "none"]
+
+for type_name in type_names:
+    try:
+        type_dict[type_name] = ImageTk.PhotoImage(Image.open(f"Type Icons/{type_name}.png"))
+    except:
+        # Fallback if image doesn't exist
+        print(f"Could not load image for type: {type_name}")
+        type_dict[type_name] = None
+
+
 def select_pokemon(move=None):
     try:
+        selected = pokemon_search_box.get()
+        values = pokemon_search_box.cget("values")
+        
         if move == 'forward':
-            pokemon_search_box.set(pokemon_search_box.get()[pokemon_search_box.current() + 1])
-            pokemon_search_box.current(pokemon_search_box.current() + 1)
-            selected = pokemon_search_box.get()
+            try:
+                current_index = values.index(selected)
+                new_index = current_index + 1
+                if new_index < len(values):
+                    pokemon_search_box.set(values[new_index])
+                    selected = values[new_index]
+            except (ValueError, IndexError):
+                # If current value not in list or at the end
+                if values:  # If there are any values
+                    pokemon_search_box.set(values[0])
+                    selected = values[0]
         elif move == 'backward':
-            pokemon_search_box.current(pokemon_search_box.current() - 1)
-            selected = pokemon_search_box.get()
-        else:
-            selected = pokemon_search_box.get()
+            try:
+                current_index = values.index(selected)
+                new_index = current_index - 1
+                if new_index >= 0:
+                    pokemon_search_box.set(values[new_index])
+                    selected = values[new_index]
+            except (ValueError, IndexError):
+                # If current value not in list or at the beginning
+                if values:  # If there are any values
+                    pokemon_search_box.set(values[-1])
+                    selected = values[-1]
     except Exception as e:
         print(e)
         selected = pokemon_search_box.get()
+        
+    # Make sure we have a valid selection
+    if not selected or selected not in pokedex.name.tolist():
+        if pokedex.name.tolist():
+            selected = pokedex.name.tolist()[0]
+            pokemon_search_box.set(selected)
 
     pokemon_name_label.configure(text="\n".join(selected.split(" - ")))
 
@@ -222,13 +261,13 @@ right_button.grid(row=0, column=4, sticky="ew", padx=5, pady=5)
 def search_pokemon():
     current_text = pokemon_search_box.get()
     if current_text == "" or current_text in pokedex.name.tolist():
-        pokemon_search_box.configure(values=pokedex.name.tolist())
+        pokemon_search_box.config(values = pokedex.name.tolist())
     else:
         values = []
         for name in pokedex.name.tolist():
             if current_text.lower() in name.lower():
                 values.append(name)
-        pokemon_search_box.configure(values=values)
+        pokemon_search_box.config(values = values)
 
 pokemon_search_box = ctk.CTkComboBox(search_frame, 
                           values=pokedex.name.tolist(),
