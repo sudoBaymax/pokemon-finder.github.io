@@ -2,3 +2,6 @@ torch
 torchvision
 Pillow
 matplotlib
+pandas
+numpy
+customtkinter
