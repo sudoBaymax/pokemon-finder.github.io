@@ -2,9 +2,10 @@
 
 This project provides a Pokedex application with a modern graphical user interface (GUI) built using CustomTkinter. It displays detailed information about Pokemon, including stats, types, images, and Pokedex entries, sourced from a CSV dataset.
 
-![image](https://github.com/user-attachments/assets/def1167e-20ba-4dc2-93c9-e0ea8926d485)
-![image](https://github.com/user-attachments/assets/590d28a6-7dcc-4c54-8347-34e3114cd2f9)
-![image](https://github.com/user-attachments/assets/86bf9837-556b-4c04-8aa0-0dfdeb194a71)
+![image](https://github.com/user-attachments/assets/b74de8d0-71b7-4c82-96d6-94f807186e29)
+![image](https://github.com/user-attachments/assets/8ac4dbce-1bca-4b8d-b5f9-eb920f04c0aa)
+![image](https://github.com/user-attachments/assets/dcc8530a-7f94-4456-b33e-d50177893ffc)
+
 
 ## Features
 
